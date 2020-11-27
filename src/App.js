@@ -14,6 +14,7 @@ function App() {
         ))
       }
       </Suspense>
+      
       </Switch>
     </Router>
   );

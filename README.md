@@ -41,6 +41,8 @@ immutable.js :Immutable数据就是一旦创建，就不能更改的数据。每
 
 用了className="xx" 不是{}
 
+移动端适配注意ipad与web端显示原始大小，撑不起100%的宽高，所以要宽度给100%而不是375px！
+
 
 
 
