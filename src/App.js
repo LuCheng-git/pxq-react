@@ -1,11 +1,21 @@
 
-
+import React, { Component,Suspense } from 'react';
+import {BrowserRouter as Router,Switch,Route,Redirect} from 'react-router-dom';
+import routers from './routers/index';
 
 function App() {
   return (
-    <div className="App">
-      4444
-    </div>
+    <Router>
+      <Switch>
+        <Suspense fallback={<h1>lodaing..</h1>}>
+      {
+        routers.map(route => (
+          <Route key={route.path} {...route}></Route>
+        ))
+      }
+      </Suspense>
+      </Switch>
+    </Router>
   );
 }
 
