@@ -6,16 +6,19 @@ import routers from './routers/index';
 function App() {
   return (
     <Router>
-      <Switch>
+      
         <Suspense fallback={<h1>lodaing..</h1>}>
+        <Switch>
       {
         routers.map(route => (
           <Route key={route.path} {...route}></Route>
         ))
       }
+      <Redirect to="/"></Redirect>
+      </Switch>
       </Suspense>
       
-      </Switch>
+      
     </Router>
   );
 }
