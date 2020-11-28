@@ -51,3 +51,18 @@ immutable.js :Immutable数据就是一旦创建，就不能更改的数据。每
 
 注意！getStyleLoaders中接收lessOptions,一定要在css-loader后面一段代码最后追加less-loader
 
+antd按需引入 安装 babel-plugin-import插件
+
+webpack.config.js中
+
+```javascript
+  {
+              test: /\.(js|mjs)$/,
+              exclude: /@babel(?:\/|\\{1,2})runtime/,
+              loader: require.resolve('babel-loader'),
+              options: {
+                babelrc: true,
+                configFile: false,
+```
+
+babelrc开为true，创建.babelrc文件，注意！此文件会与package.json里的`"babel":{}`冲突，所以要删掉package里的这个文件
