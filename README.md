@@ -45,5 +45,9 @@ immutable.js :Immutable数据就是一旦创建，就不能更改的数据。每
 
 
 
+# day02
 
+`@import (reference) "foo.less";` 使用 @ import(reference) 导入外部文件,reference 是 Less 语言中最强大的特性之一,除非引用，否则不将导入的样式添加到已编译的输出中
+
+注意！getStyleLoaders中接收lessOptions,一定要在css-loader后面一段代码最后追加less-loader
 

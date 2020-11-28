@@ -63,6 +63,7 @@ const cssModuleRegex = /\.module\.css$/;
 // 引入less
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
+
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
@@ -114,6 +115,7 @@ module.exports = function (webpackEnv) {
         loader: require.resolve('css-loader'),
         options: cssOptions,
       },
+      
       {
         // Options for PostCSS as we reference these options twice
         // Adds vendor prefixing based on your specified browser support in
@@ -140,6 +142,10 @@ module.exports = function (webpackEnv) {
           ],
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
+      },
+      {
+        loader: require.resolve('less-loader'),
+        options: lessOptions,
       },
     ].filter(Boolean);
     if (preProcessor) {
