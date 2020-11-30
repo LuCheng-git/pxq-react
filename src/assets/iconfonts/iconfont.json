@@ -1,0 +1,30 @@
+{
+  "id": "2236966",
+  "name": "pxq-react",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7008887",
+      "name": "addition_fill",
+      "font_class": "addition_fill",
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
+    },
+    {
+      "icon_id": "7008973",
+      "name": "offline_fill",
+      "font_class": "offline_fill",
+      "unicode": "e712",
+      "unicode_decimal": 59154
+    },
+    {
+      "icon_id": "7009015",
+      "name": "success_fill",
+      "font_class": "success_fill",
+      "unicode": "e72d",
+      "unicode_decimal": 59181
+    }
+  ]
+}
