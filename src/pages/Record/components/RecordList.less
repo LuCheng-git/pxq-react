@@ -1,0 +1,35 @@
+@import (reference) '../../../style/mixin.less';
+
+.recordItem{
+    background-color: #fff;
+    width: 100%;
+    margin:10px 0;
+    .recordItemHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:12px;
+        font-size: 14px;
+        color:#ccc;
+        border-bottom: 1px solid #ccc;
+        span:nth-of-type(2){
+            font-size: 18px;
+            color:red;
+        }
+    }
+    .recordItemContant{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        padding:0 12px;
+        border-bottom: 1px solid #ccc;
+        p{
+            padding:6px 0;
+        }
+    }
+    .recordItemFooter{
+        display: block;
+        padding:12px;
+    }
+    
+}

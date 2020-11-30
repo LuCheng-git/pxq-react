@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Switch, Route,Redirect} from 'react-router-dom';
 import PublicHeader from '../../components/PublicHeader/Index';
 import RecordList from './components/RecordList';
+import './Index.less'
 class Record extends Component {
     constructor(props) {
         super(props);
@@ -17,13 +18,14 @@ class Record extends Component {
                             <NavLink to="/record/audited" className="navLink">待审核</NavLink>
                             <NavLink to="/record/failed" className="navLink">未通过</NavLink>
                     </nav>
+                    <i className="navFlagBar"></i>
                 </section>
 
                 <Switch>
                     <Route path="/record/passed"  component={RecordList}></Route>
                     <Route path="/record/audited" component={RecordList}></Route>
                     <Route path="/record/failed"  component={RecordList}></Route>
-                    <Redirect to="/record" exact component={RecordList}></Redirect>
+                    <Redirect from="/record" to="/record/passed" exact component={RecordList}></Redirect>
                 </Switch>
             </main>
         );
