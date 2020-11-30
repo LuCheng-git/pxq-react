@@ -97,3 +97,15 @@ module.exports = {
 }
 ```
 
+# day03
+
+先安装 redux 再安装 react-redux，脚手架中并没有他们两个,
+
+redux-devtools-extension 可以查看redux的工具
+
+`import {composeWithDevTools} from "redux-devtools-extension";` 放在store的index中
+
+`const middleware = IS_DEVELOPMENT?composeWithDevTools(applyMiddleware(thunk)):applyMiddleware(thunk);`
+
+
+

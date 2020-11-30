@@ -17,7 +17,7 @@ class Home extends Component {
     render() {
         return (
             <main className="homeContainer">
-                <PublicHeader title="首页"></PublicHeader>
+                <PublicHeader title="首页" record></PublicHeader>
                 <p className="common-title">请输入您的信息</p>
                 <Form
                     name="basic"

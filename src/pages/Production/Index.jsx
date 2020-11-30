@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import {is,fromJS} from 'immutable'
 import PublicHeader from '../../components/PublicHeader/Index.jsx'
+import {getProData} from '../../store/production/actionType'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Index.less'
 
 class Production extends Component {
@@ -7,10 +11,19 @@ class Production extends Component {
         super(props);
         this.state = {}
     }
+    static propTypes = {
+        proData: PropTypes.object.isRequired,
+       
+    }
+    
+    componentDidMount(){
+  
+    }
+
     render() {
         return (
             <main className="productionContainer">
-                <PublicHeader title="首页"></PublicHeader>
+                <PublicHeader title="首页" confirm></PublicHeader>
                 <section className="proListContainer">
                     <ul className="proListUl">
                         <li className="proListItem">
@@ -32,4 +45,4 @@ class Production extends Component {
     }
 }
 
-export default Production;
+export default connect(state=>({proData:state.proData}))(Production);

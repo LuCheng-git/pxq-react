@@ -10,8 +10,8 @@ class Balance extends Component {
     }
     render() { 
         return (
-            <main className="balanceContainer">
-                <PublicHeader title="提现"></PublicHeader>
+            <main className="balanceContainer" >
+                <PublicHeader title="提现" record></PublicHeader>
                 <section className="cashOutContent">
                     <p className="cashOutHeader">您的可提现金额为：¥60</p>
                     <form className="cashOutForm">

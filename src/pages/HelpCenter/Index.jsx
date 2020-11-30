@@ -9,7 +9,7 @@ class HelpCenter extends Component {
     render() {
         return (
             <main className="HelpCenterContainer">
-                <PublicHeader title="帮助中心"></PublicHeader>
+                <PublicHeader title="帮助中心" record></PublicHeader>
                 <article className="contextContainer">
                     <h2>介绍</h2>
                     <p>本项目主要用于理解 react 和 redux 的编译方式，以及 react + redux 之间的配合方式</p>
