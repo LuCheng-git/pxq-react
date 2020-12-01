@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import PublicHeader from '../../components/PublicHeader/Index.jsx'
+import Alert from '../../components/Alert/Index'
 import './Index.less'
 
 import { Form, Input, Button,Upload} from 'antd';
@@ -57,12 +58,12 @@ class Home extends Component {
 
 
                     
-                        <Button className="subButton" type="primary" htmlType="submit">
+                        <Button className="subButton" type="primary" htmlType="submit" onClick={this.props.showModal}>
                             提交
                         </Button>
                    
                 </Form>
-
+                <Alert></Alert>
             </main>
         );
     }
