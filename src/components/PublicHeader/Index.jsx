@@ -8,17 +8,27 @@ class PublicHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {}
-
-        this.static = {
-            record: PropTypes.any,
-            title: PropTypes.string.isRequired,
-            confirm: PropTypes.any,
-        }
     }
+
+    
+    static = {
+        record: PropTypes.any,
+        title: PropTypes.string.isRequired,
+        confirm: PropTypes.any,
+    }
+
+    state = {
+        navState:true,
+    }
+
+    toggleNavState = () =>{
+        this.setState({navState:!this.state.navState})
+    }
+
     render() {
         return (
             <header className="headerContainer">
-                <UnorderedListOutlined className="headerLink"></UnorderedListOutlined>
+                <UnorderedListOutlined className="headerLink" onClick={this.toggleNavState}></UnorderedListOutlined>
                 <span className="headerTitle">{this.props.title}</span>
                 {
                     this.props.record && <NavLink to="/record" exact className="header-link "><FileSearchOutlined /></NavLink>
@@ -26,11 +36,11 @@ class PublicHeader extends Component {
                 {
                     this.props.confirm && <NavLink to="/" exact className="header-link ">确定</NavLink>
                 }
-                <aside className='navSideList'>
+                { this.state.navState && <aside className='navSideList' onClick={this.toggleNavState}>
                     <NavLink to="/" exact className="sideLink ">首页<RightOutlined /></NavLink>
                     <NavLink to="/balance" exact className="sideLink ">提现<RightOutlined /></NavLink>
-                    <NavLink to="/helpcenter" exact className="header-link ">帮助中心<RightOutlined /></NavLink>
-                </aside>
+                    <NavLink to="/helpcenter" exact className="sideLink ">帮助中心<RightOutlined /></NavLink>
+                </aside>}
             </header>
         );
     }

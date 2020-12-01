@@ -19,7 +19,7 @@ class Balance extends Component {
                         <p>¥ <input type="text" placeholder="0.00" maxLength="5"/></p>
                     </form>
                     <Button className="subButton" type="primary" htmlType="submit">
-                        Submit
+                        申请提现
                     </Button>
                 </section>
             </main>

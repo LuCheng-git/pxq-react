@@ -58,7 +58,7 @@ class Home extends Component {
 
                     
                         <Button className="subButton" type="primary" htmlType="submit">
-                            Submit
+                            提交
                         </Button>
                    
                 </Form>
