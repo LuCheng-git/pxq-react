@@ -61,7 +61,7 @@ class Home extends Component {
 
                     <p className="common-title">请选择销售产品</p>
 
-                    <Link className="selectBtn">
+                    <Link className="selectBtn" to='/production'>
                         选择产品
                     </Link>
 

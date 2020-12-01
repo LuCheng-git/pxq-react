@@ -20,6 +20,7 @@ body .cashOutForm {
 body .cashOutForm input {
   border: none;
   width: 50px;
+  outline: none;
 }
 body .subButton {
   width: 160px;

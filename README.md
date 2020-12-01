@@ -2,8 +2,6 @@
 
 **day01**
 
-在react脚手架中@符号代表src文件目录底下
-
 pages文件里放各个页面，组件名要大写，放各自的jsx与less文件。
 
 store文件里有个暴露文件index.js里面需要
@@ -35,7 +33,7 @@ store 先准备数据
 immutable.js :Immutable数据就是一旦创建，就不能更改的数据。每当对Immutable对象进行修改的时候，就会返回一个新的Immutable对象，以此来保证数据的不可变。
 不可变数据让纯函数更强大，也让程序开发愈发简单明了
 
-`const Home = lazy(/*webpackChunkName:"Home"*/()=>import("../pages/Home/Index"));`  路由懒加载，..不能变@
+`const Home = lazy(/*webpackChunkName:"Home"*/()=>import("../pages/Home/Index"));`  路由懒加载
 
 懒加载 要添加Suspense fallback 不然报错
 
@@ -124,3 +122,54 @@ z-index要给最外层的，不能影响外部不相关的元素样式
 class组件中定义函数，函数中使用函数要加this,render里函数要加bind(this)!
 
 `componentWillReceiveProps(nextProps)`  可以获得下次更新时候的数据，能触发N次
+
+按需加载，只有切换到页面的时候才去加载对应的js文件。react配合webpack进行按需加载的方法很简单，Route的component改为getComponent，组件用require.ensure的方式获取，并在webpack中配置chunkFilename。(没做)
+
+```js
+const helpCenter = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('../Component/helpCenter').default)
+    },'helpCenter')
+}
+
+const RouteConfig = (
+    <Router history={history}>
+        <Route path="/" component={Roots}>
+            <IndexRoute component={index} />//首页
+            <Route path="index" component={index} />
+            <Route path="helpCenter" getComponent={helpCenter} />//帮助中心
+            <Redirect from='*' to='/'  />
+        </Route>
+    </Router>
+);
+```
+
+connect，Provider，mapStateToProps,mapDispatchToProps是react-redux提供的
+
+
+
+redux要有dispatch来触发,dispatch里面一定要有type`store.dispatch{type:""}`,所有action要有type。dispatch调用的是reducer.仓库的值是reducer的返回值,reducer在创建仓库的时候执行,reducer接收两个参数，数据的初始值和action,store.dispatch里也要有payload:  能传递东西进reducer,store.subscribe在数据变化时会执行unsubscribe就是subscribe的值，将它运行就清除subscribe
+
+构造类函数定义要用 new 
+
+```js
+class API extends Server  {
+    
+
+    async getProduction (params={}){
+        try{
+            let result = await this.axios('get','https://api.cangdu.org/shopro/data/products',params)
+            if(result && (result.data.data instanceof Object) && result.http_code === 200){
+                return result.data.data || [];
+            }else{
+               
+            }
+        }catch(error){
+            throw error
+        }
+    }
+}
+
+export default new API();
+```
+

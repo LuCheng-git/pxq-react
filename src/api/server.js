@@ -36,8 +36,8 @@ axios.interceptors.response.use(function (response) {
 
 export default class Server{
     axios(method,url,params){
-        return newPromise((resolve, reject) => {
-            if(typeof params !== 'object') parms={};
+        return new Promise((resolve, reject) => {
+            if(typeof params !== 'object') params={};
             let _options = params;
             _options = {
               method,

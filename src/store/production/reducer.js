@@ -7,5 +7,15 @@ let initState = {
 
 export const proData = (preState = initState , action) => {
     preState = JSON.parse(JSON.stringify(preState))
-    return proData
+   
+    let imuDataList ;
+    let imuItem;
+    switch(action.type) {
+        case pro.GET_PRODUCTION:
+            return  {...preState, ...action}
+        default:
+        return preState
+    }
+  
 }
+
