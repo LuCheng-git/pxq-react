@@ -3,6 +3,7 @@ body {
 }
 body .recordNavCon {
   position: relative;
+  padding-top: 48px;
 }
 body .recordNavCon .recordNav {
   display: flex;

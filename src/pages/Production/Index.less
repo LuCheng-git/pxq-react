@@ -1,32 +1,36 @@
 @import (reference) '../../style/mixin.less';
 @import '../../assets/iconfonts/iconfont.css';
 
-.proListItem{
-    display: flex;
-    justify-content:space-between;
-    padding:20px 14px;
-    font-size: 18px;
-    border-bottom: 1px solid #ccc;
-    .proSelect{
-        .icon-success_fill{
-            font-size: 24px;
-            color:@base-color;
-        } 
-    }
-    .proItemEdit{
-        font-size: 14px;
-        width:60px;
+.proListContainer{
+    padding-top: 48px;
+    .proListItem{
         display: flex;
         justify-content:space-between;
-        align-items: center;
-        .icon-offline_fill{
-            font-size: 24px;
-            color:#ccc;
+        padding:20px 14px;
+        font-size: 18px;
+        border-bottom: 1px solid #ccc;
+        .proSelect{
+            .icon-success_fill{
+                font-size: 24px;
+                color:@base-color;
+            } 
         }
-        .icon-addition_fill{
-            font-size: 24px;
-            color:@base-color;
+        .proItemEdit{
+            font-size: 14px;
+            width:60px;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            .icon-offline_fill{
+                font-size: 24px;
+                color:#ccc;
+            }
+            .icon-addition_fill{
+                font-size: 24px;
+                color:@base-color;
+            }
         }
+    
     }
-
 }
+

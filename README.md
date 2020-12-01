@@ -109,3 +109,6 @@ redux-devtools-extension 可以查看redux的工具
 
 
 
+# day04
+
+better-scroll 模拟滚动插件

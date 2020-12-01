@@ -1,27 +1,30 @@
 @import '../../assets/iconfonts/iconfont.css';
-.proListItem {
+.proListContainer {
+  padding-top: 48px;
+}
+.proListContainer .proListItem {
   display: flex;
   justify-content: space-between;
   padding: 20px 14px;
   font-size: 18px;
   border-bottom: 1px solid #ccc;
 }
-.proListItem .proSelect .icon-success_fill {
+.proListContainer .proListItem .proSelect .icon-success_fill {
   font-size: 24px;
   color: darkslateblue;
 }
-.proListItem .proItemEdit {
+.proListContainer .proListItem .proItemEdit {
   font-size: 14px;
   width: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.proListItem .proItemEdit .icon-offline_fill {
+.proListContainer .proListItem .proItemEdit .icon-offline_fill {
   font-size: 24px;
   color: #ccc;
 }
-.proListItem .proItemEdit .icon-addition_fill {
+.proListContainer .proListItem .proItemEdit .icon-addition_fill {
   font-size: 24px;
   color: darkslateblue;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { UnorderedListOutlined ,FileSearchOutlined} from '@ant-design/icons';
+import { UnorderedListOutlined, FileSearchOutlined ,RightOutlined } from '@ant-design/icons';
 import './Index.less';
 
 class PublicHeader extends Component {
@@ -26,6 +26,11 @@ class PublicHeader extends Component {
                 {
                     this.props.confirm && <NavLink to="/" exact className="header-link ">确定</NavLink>
                 }
+                <aside className='navSideList'>
+                    <NavLink to="/" exact className="sideLink ">首页<RightOutlined /></NavLink>
+                    <NavLink to="/balance" exact className="sideLink ">提现<RightOutlined /></NavLink>
+                    <NavLink to="/helpcenter" exact className="header-link ">帮助中心<RightOutlined /></NavLink>
+                </aside>
             </header>
         );
     }
