@@ -122,3 +122,5 @@ z-index要给最外层的，不能影响外部不相关的元素样式
 设置`position:fixed;` 一定要设置`top right left bottom` 不然会出Bug
 
 class组件中定义函数，函数中使用函数要加this,render里函数要加bind(this)!
+
+`componentWillReceiveProps(nextProps)`  可以获得下次更新时候的数据，能触发N次
