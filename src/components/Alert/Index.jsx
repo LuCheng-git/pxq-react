@@ -19,6 +19,7 @@ const Alert = () => {
   return (
     <>
       <Modal
+        style={{width:'80px',height:'80px'}}
         visible={isModalVisible}
         onOk={handleOk}
         cancelText='取消'
