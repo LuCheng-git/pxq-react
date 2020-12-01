@@ -16,8 +16,12 @@ body{
                 list-style:none;  
                 text-align: center;
                 text-decoration:none;
-              
+                color: black;
             }
+            .active{
+                color:@base-color;
+            }
+
             .navLink:not(:last-of-type) {
                 border-right:1px solid #ccc;
             }
@@ -28,7 +32,9 @@ body{
             height:1px;
             bottom:0;
             background-color:@base-color;
-            margin-left: 7%;
+            left:17%;
+            margin-left: -38px;
+            transition:left 0.3s;
         }
     }
 }

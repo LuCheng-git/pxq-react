@@ -18,6 +18,10 @@ body .recordNavCon .recordNav .navLink {
   list-style: none;
   text-align: center;
   text-decoration: none;
+  color: black;
+}
+body .recordNavCon .recordNav .active {
+  color: darkslateblue;
 }
 body .recordNavCon .recordNav .navLink:not(:last-of-type) {
   border-right: 1px solid #ccc;
@@ -28,5 +32,7 @@ body .recordNavCon .navFlagBar {
   height: 1px;
   bottom: 0;
   background-color: darkslateblue;
-  margin-left: 7%;
+  left: 17%;
+  margin-left: -38px;
+  transition: left 0.3s;
 }
