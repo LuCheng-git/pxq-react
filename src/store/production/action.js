@@ -20,4 +20,22 @@ export const getProData = () =>{
             throw error
         }
     }
+    
+}
+
+//选择商品
+export const togleProduction = index => {
+    return {
+        type:pro.TOGLE_PRODUCTION,
+        index,
+    }
+}
+
+//编辑商品
+export const editProduction = (index,selectNum) => {
+    return {
+        type:pro.EDIT_PRODUCTION,
+        index,
+        selectNum,
+    }
 }

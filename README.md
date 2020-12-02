@@ -173,3 +173,6 @@ class API extends Server  {
 export default new API();
 ```
 
+# day05
+
+巧用get和set，能够直接操作对象属性实现读写，可以极大的提高编程效率

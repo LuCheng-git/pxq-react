@@ -11,7 +11,13 @@
 }
 .proListContainer .proListItem .proSelect .icon-success_fill {
   font-size: 24px;
+  color: #ccc;
+}
+.proListContainer .proListItem .proSelect .selectPro {
   color: darkslateblue;
+}
+.proListContainer .proListItem .proSelect .proName {
+  color: black;
 }
 .proListContainer .proListItem .proItemEdit {
   font-size: 14px;
@@ -23,6 +29,9 @@
 .proListContainer .proListItem .proItemEdit .icon-offline_fill {
   font-size: 24px;
   color: #ccc;
+}
+.proListContainer .proListItem .proItemEdit .editActive {
+  color: darkslateblue;
 }
 .proListContainer .proListItem .proItemEdit .icon-addition_fill {
   font-size: 24px;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { is, fromJS } from 'immutable'
 import PublicHeader from '../../components/PublicHeader/Index.jsx'
-import { getProData } from '../../store/production/action'
+import { getProData,togleProduction,editProduction} from '../../store/production/action'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Index.less'
@@ -13,7 +13,21 @@ class Production extends Component {
     }
     static propTypes = {
         proData: PropTypes.object.isRequired,
+        getProData: PropTypes.func.isRequired,
+        togleProduction: PropTypes.func.isRequired,
+        editProduction: PropTypes.func.isRequired,
+    }
 
+    toSelect = index => {
+        this.props.togleProduction(index)
+    }
+
+    handleEdit = (index,selectNum) => {
+        let currentNum = this.props.proData.dataList[index].selectNum + selectNum
+        if(currentNum < 0){
+            return
+        }
+        this.props.editProduction(index,currentNum)
     }
 
     componentDidMount() {
@@ -29,17 +43,17 @@ class Production extends Component {
                 <section className="proListContainer">
                     <ul className="proListUl">
                         {
-                            this.props.proData.dataList.map(item => (
+                            this.props.proData.dataList.map((item,index) => (
                                 <li className="proListItem" key={item.product_id}>
-                                    <div className="proSelect">
-                                        <span className="iconfont icon-success_fill"></span>
-                                        <span>{item.product_name}</span>
+                                    <div className="proSelect" onClick={this.toSelect.bind(this,index)}>
+                                        <span className={`iconfont icon-success_fill ${item.selectStatus ? 'selectPro' : ''}`}></span>
+                                        <span className="proName">{item.product_name}</span>
                                     </div>
 
                                     <div className="proItemEdit">
-                                        <span className="iconfont icon-offline_fill"></span>
-                                        <span className="proNum">0</span>
-                                        <span className="iconfont icon-addition_fill"></span>
+                                        <span className={`iconfont icon-offline_fill ${item.selectNum > 0 ? 'editActive' : ''}`} onClick={this.handleEdit.bind(this,index,-1)}></span>
+                                            <span className="proNum">{item.selectNum} </span>
+                                        <span className="iconfont icon-addition_fill" onClick={this.handleEdit.bind(this,index,1)}></span>
                                     </div>
                                 </li>
                             ))
@@ -51,4 +65,4 @@ class Production extends Component {
     }
 }
 
-export default connect(state => ({ proData: state.proData }), { getProData })(Production);
+export default connect(state => ({ proData: state.proData }), { getProData,togleProduction,editProduction})(Production);
