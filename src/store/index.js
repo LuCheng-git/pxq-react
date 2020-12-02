@@ -11,7 +11,7 @@ const middleware = IS_DEVELOPMENT?
     composeWithDevTools(applyMiddleware(thunk)):applyMiddleware(thunk);
 
 let store = createStore(
-    combineReducers({...production}),
+    combineReducers({...production,...home}),
     middleware
 );
 export default store;

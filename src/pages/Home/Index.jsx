@@ -1,40 +1,52 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {clearProduction} from '../../store/production/action'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { clearProduction } from '../../store/production/action'
+import {saveFormData,saveImg,clearData} from '../../store/home/action'
 import PropTypes from 'prop-types'
 import PublicHeader from '../../components/PublicHeader/Index.jsx'
 import './Index.less'
 
-import { Form, Input, Button,Upload,Modal} from 'antd';
+import { Form, Input, Button, Upload, Modal ,message} from 'antd';
 
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible:false,
-            
+            isModalVisible: false,
+            alertTip:'',//弹框提示文字
         }
     }
 
     static propTypes = {
+        formData: PropTypes.object.isRequired,
+        saveFormData: PropTypes.func.isRequired,
+        saveImg: PropTypes.func.isRequired,
+        clearData: PropTypes.func.isRequired,
         clearProduction: PropTypes.func.isRequired
     }
 
-    showModal () {
-        this.setIsModalVisible(true);
-      };
-    
-    handleOk (){
-        this.setIsModalVisible(false);
-      };
-    
-    handleCancel (){
-        this.setIsModalVisible(false);
-      };
+    imageUrl = 'http://localhost:3000'
 
-    setIsModalVisible (isModalVisible){
+    componentDidMount(){
+        console.log(this.props.formData)
+    }
+
+    showModal() {
+        this.setIsModalVisible(true);
+    };
+
+    handleOk() {
+        this.setIsModalVisible(false);
+    };
+
+    handleCancel() {
+        this.setIsModalVisible(false);
+    };
+
+    setIsModalVisible(isModalVisible) {
         this.setState({
             isModalVisible
         })
@@ -47,21 +59,84 @@ class Home extends Component {
         this.selectedProList = []
         console.log(props.proData.dataList)
         props.proData.dataList.forEach(item => {
-            if(item.selectStatus && item.selectNum){
+            if (item.selectStatus && item.selectNum) {
                 this.selectedProList.push(item)
             }
-            console.log(this.selectedProList)
+
         })
-        this.setState({props})
+        console.log(this.selectedProList)
+        this.setState({ props })
     }
 
     componentDidMount() {
         this.initData(this.props)
     }
 
+    //提交表单
+    subForm = () => {
+        this.showModal()
+        const {orderSum,name,phoneNum} = this.props.formData
+        let alertTip = ''
+        if(!orderSum.toString().length){
+            alertTip = '请填写金额';
+          }else if(!name.toString().length){
+            alertTip = '请填写姓名';
+          }else if(!phoneNum.toString().length){
+            alertTip = '请填写正确的手机号';
+          }else{
+            alertTip = '添加数据成功';
+            this.props.clearSelected();
+            this.props.clearData();
+          }
+          this.setState({
+            alertTip,
+          })
+          console.log('ddsadas')
+    }
+    //上传图片
+    getBase64(img, callback) {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+      }
 
+    beforeUpload(file) {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+          message.error('You can only upload JPG/PNG file!');
+        }
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+          message.error('Image must smaller than 2MB!');
+        }
+        return isJpgOrPng && isLt2M;
+      }
+
+      handleChange = info => {
+        if (info.file.status === 'uploading') {
+          this.setState({ loading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          // Get this url from response in real world.
+          this.getBase64(info.file.originFileObj, imageUrl =>
+            this.setState({
+              imageUrl,
+              loading: false,
+            }),
+          );
+        }
+      };
 
     render() {
+
+        const { loading, imageUrl } = this.state;
+        const uploadButton = (
+            <div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+        );
         return (
             <main className="homeContainer">
                 <PublicHeader title="首页" record></PublicHeader>
@@ -98,38 +173,48 @@ class Home extends Component {
                                         {item.product_name}X{item.selectNum}
                                     </li>)
                                 }
-                            </ul>:'选择产品'
+                            </ul> : '选择产品'
                         }
-                        
+
                     </Link>
 
                     <p className="common-title">请上传发票凭证</p>
-                    
+
                     <Form.Item className="formItem"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Upload className="upload"></Upload>
+                        <Upload
+                            name="invoice"
+                            listType="picture-card"
+                            className="upload"
+                            showUploadList={false}
+                            action="http://localhost:3000"
+                            beforeUpload={this.beforeUpload}
+                            onChange={this.handleChange}
+                        >
+                            {imageUrl ? <img src={imageUrl} alt="invoice" style={{ width: '100%' }} /> : uploadButton}
+                        </Upload>
                     </Form.Item>
 
 
-                    
-                        <Button className="subButton" type="primary" htmlType="submit" onClick={this.showModal.bind(this)}>
-                            提交
+
+                    <Button className="subButton" type="primary" htmlType="submit" onClick={this.subForm.bind(this)}>
+                        提交
                         </Button>
-                        <Modal
-                            style={{width:'80px',height:'80px'}}
-                            visible={this.state.isModalVisible}
-                            onOk={this.handleOk.bind(this)}
-                            cancelText='取消'
-                            okText='确认'
-                            onCancel={this.handleCancel.bind(this)}
-                        >
-                            <p>请输填写金额</p>
-                        </Modal>
+                    <Modal
+                        style={{ width: '80px', height: '80px' }}
+                        visible={this.state.isModalVisible}
+                        onOk={this.handleOk.bind(this)}
+                        cancelText='取消'
+                        okText='确认'
+                        onCancel={this.handleCancel.bind(this)}
+                    >
+                        <p>请输填写金额</p>
+                    </Modal>
                 </Form>
             </main>
         );
     }
 }
 
-export default connect(state => ({proData:state.proData}),{clearProduction})(Home);
+export default connect(state => ({ proData: state.proData ,formData: state.formData}), { clearProduction, saveFormData,saveImg,clearData})(Home);

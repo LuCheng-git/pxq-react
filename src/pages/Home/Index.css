@@ -40,8 +40,16 @@ body .selectBtn .selectUl .selectLi {
 }
 body .upload {
   width: 100%;
-  height: 48px;
+  height: 100%;
   background-color: #fff;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+body .upload .ant-upload-select-picture-card {
+  width: 100%;
+  height: 60px;
+  margin: 0;
+  border: none;
 }
 body .subButton {
   width: 160px;
