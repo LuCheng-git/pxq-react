@@ -39,3 +39,10 @@ export const editProduction = (index,selectNum) => {
         selectNum,
     }
 }
+
+//清除商品
+export const clearProduction = () => {
+    return {
+        type:pro.CLEAR_PRODUCTION
+    }
+}

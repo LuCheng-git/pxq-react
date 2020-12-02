@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {clearProduction} from '../../store/production/action'
+import PropTypes from 'prop-types'
 import PublicHeader from '../../components/PublicHeader/Index.jsx'
 import './Index.less'
 
@@ -10,8 +13,13 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible:false
+            isModalVisible:false,
+            
         }
+    }
+
+    static propTypes = {
+        clearProduction: PropTypes.func.isRequired
     }
 
     showModal () {
@@ -31,6 +39,27 @@ class Home extends Component {
             isModalVisible
         })
     }
+
+    selectedProList = []
+
+    //初始化选择数据
+    initData = props => {
+        this.selectedProList = []
+        console.log(props.proData.dataList)
+        props.proData.dataList.forEach(item => {
+            if(item.selectStatus && item.selectNum){
+                this.selectedProList.push(item)
+            }
+            console.log(this.selectedProList)
+        })
+        this.setState({props})
+    }
+
+    componentDidMount() {
+        this.initData(this.props)
+    }
+
+
 
     render() {
         return (
@@ -62,7 +91,16 @@ class Home extends Component {
                     <p className="common-title">请选择销售产品</p>
 
                     <Link className="selectBtn" to='/production'>
-                        选择产品
+                        {
+                            this.selectedProList.length ? <ul className="selectUl">
+                                {
+                                    this.selectedProList.map(item => <li key={item.product_id} className="selectLi">
+                                        {item.product_name}X{item.selectNum}
+                                    </li>)
+                                }
+                            </ul>:'选择产品'
+                        }
+                        
                     </Link>
 
                     <p className="common-title">请上传发票凭证</p>
@@ -94,4 +132,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default connect(state => ({proData:state.proData}),{clearProduction})(Home);

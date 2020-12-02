@@ -25,6 +25,16 @@ export const proData = (preState = initState , action) => {
             imuItem = imuItem.set('selectNum',action.selectNum)
             imuDataList = imuDataList.set(action.index,imuItem)
             return {...preState, ...{dataList:imuDataList.toJS()}}
+            case pro.CLEAR_PRODUCTION:
+                imuDataList = Immutable.fromJS(preState.dataList)
+                for (let i = 0; i < imuDataList.length;i++){
+                    imuDataList = imuDataList.update(i,item => {
+                        item = item.set('selectStatus',false);
+                        item = item.set('selectNum',0);
+                        return item;
+                    })
+                }
+                return {...preState, ...{dataList:imuDataList.toJS()}}
         default:
         return preState
     }

@@ -31,8 +31,10 @@ class Production extends Component {
     }
 
     componentDidMount() {
-
-        this.props.getProData();
+        if(!this.props.proData.dataList.length){
+            this.props.getProData();
+        }
+        
 
     }
 
