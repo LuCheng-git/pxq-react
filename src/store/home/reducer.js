@@ -11,7 +11,7 @@ export const formData = (preState = initData, action = {}) => {
     preState = JSON.parse(JSON.stringify(preState));
     switch (action.type) {
         case home.SAVE_FORMDATA:
-            return { ...preState,...{[action.type]:action.value}}
+            return { ...preState,...{[action.datatype]:action.value}}
         case home.SAVE_IMG:
             return { ...preState,...{imgPath:action.path}}
         case home.CLEAR_DATA:

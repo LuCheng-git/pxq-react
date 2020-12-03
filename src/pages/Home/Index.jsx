@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import API from '../../api/api';
 import { clearProduction } from '../../store/production/action'
 import {saveFormData,saveImg,clearData} from '../../store/home/action'
 import PropTypes from 'prop-types'
@@ -17,6 +18,7 @@ class Home extends Component {
         this.state = {
             isModalVisible: false,
             alertTip:'',//弹框提示文字
+            loading: false,
         }
     }
 
@@ -28,12 +30,14 @@ class Home extends Component {
         clearProduction: PropTypes.func.isRequired
     }
 
-    imageUrl = 'http://localhost:3000'
 
     componentDidMount(){
         console.log(this.props.formData)
     }
 
+
+
+    
     showModal() {
         this.setIsModalVisible(true);
     };
@@ -71,29 +75,39 @@ class Home extends Component {
     componentDidMount() {
         this.initData(this.props)
     }
+    //处理Input
+    handleInput = (type,e) => {
+        let value = e.target.value
+        this.props.saveFormData(value,type)
+        
+    }
 
     //提交表单
     subForm = () => {
-        this.showModal()
+        
         const {orderSum,name,phoneNum} = this.props.formData
         let alertTip = ''
+        console.log(orderSum.toString().length)
         if(!orderSum.toString().length){
             alertTip = '请填写金额';
+            
           }else if(!name.toString().length){
             alertTip = '请填写姓名';
           }else if(!phoneNum.toString().length){
             alertTip = '请填写正确的手机号';
           }else{
             alertTip = '添加数据成功';
-            this.props.clearSelected();
+            this.props.clearProduction();
             this.props.clearData();
           }
+          this.showModal()
           this.setState({
             alertTip,
           })
           console.log('ddsadas')
     }
     //上传图片
+
     getBase64(img, callback) {
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result));
@@ -119,7 +133,7 @@ class Home extends Component {
         }
         if (info.file.status === 'done') {
           // Get this url from response in real world.
-          this.getBase64(info.file.originFileObj, imageUrl =>
+           this.getBase64(info.file.originFileObj, imageUrl =>
             this.setState({
               imageUrl,
               loading: false,
@@ -131,11 +145,14 @@ class Home extends Component {
     render() {
 
         const { loading, imageUrl } = this.state;
+        console.log(this.state.imageUrl)
+        // this.props.saveImg(this.state.imageUrl)
         const uploadButton = (
             <div>
                 {loading ? <LoadingOutlined /> : <PlusOutlined />}
                 <div style={{ marginTop: 8 }}>Upload</div>
             </div>
+            
         );
         return (
             <main className="homeContainer">
@@ -148,19 +165,19 @@ class Home extends Component {
                     <Form.Item className="formItem"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
-                        <Input className="formInput" prefix="销售金额 :" />
+                        <Input className="formInput" prefix="销售金额 :"  onChange={this.handleInput.bind(this,'orderSum')}/>
                     </Form.Item>
 
                     <Form.Item className="formItem"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input className="formInput" prefix="客户姓名 :" />
+                        <Input className="formInput" prefix="客户姓名 :" onChange={this.handleInput.bind(this,'name')}/>
                     </Form.Item>
 
                     <Form.Item className="formItem"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input className="formInput" prefix="客户电话 :" />
+                        <Input className="formInput" prefix="客户电话 :" onChange={this.handleInput.bind(this,'phoneNum')}/>
                     </Form.Item>
 
                     <p className="common-title">请选择销售产品</p>
@@ -184,15 +201,15 @@ class Home extends Component {
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Upload
-                            name="invoice"
+                    
                             listType="picture-card"
                             className="upload"
                             showUploadList={false}
-                            action="http://localhost:3000"
+                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                             beforeUpload={this.beforeUpload}
                             onChange={this.handleChange}
                         >
-                            {imageUrl ? <img src={imageUrl} alt="invoice" style={{ width: '100%' }} /> : uploadButton}
+                            {imageUrl ? <img className="uploadImg" src={imageUrl} alt="invoice" style={{ width: '100%' }} /> : uploadButton}
                         </Upload>
                     </Form.Item>
 
@@ -209,7 +226,7 @@ class Home extends Component {
                         okText='确认'
                         onCancel={this.handleCancel.bind(this)}
                     >
-                        <p>请输填写金额</p>
+                        <p>{this.state.alertTip}</p>
                     </Modal>
                 </Form>
             </main>

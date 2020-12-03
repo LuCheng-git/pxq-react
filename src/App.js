@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       
-        <Suspense fallback={<h1>lodaing..</h1>}>
+        <Suspense fallback={<h1>loading..</h1>}>
         <Switch>
       {
         routers.map(route => (

@@ -9,7 +9,9 @@ class Balance extends Component {
         super(props);
         this.state = {
             isModalVisible:false,
-            balance:0
+            balance:0,
+            alertTip:'',//弹框提示文字
+            applyNum: '',
         }
     }
 
@@ -24,10 +26,24 @@ class Balance extends Component {
     handleCancel (){
         this.setIsModalVisible(false);
       };
+    
+    //输入框
+    handleInput = e => {
+        let value = e.target.value;
+        this.setState({applyNum:value});
+    }
 
     setIsModalVisible (isModalVisible){
+        let alertTip = ''
+        if(!this.state.applyNum.toString().length){
+            alertTip = '请填写金额';
+          }else{
+            alertTip = '提现成功';
+          }
         this.setState({
-            isModalVisible
+            isModalVisible,
+            alertTip,
+            applyNum:''
         })
     }
     // 初始化数据
@@ -56,7 +72,7 @@ class Balance extends Component {
                 <p className="cashOutHeader">您的可提现金额为：¥{this.state.balance}</p>
                     <form className="cashOutForm">
                         <p>请输入提现金额（元）</p>
-                        <p>¥ <input type="text" placeholder="0.00" maxLength="5"/></p>
+                        <p>¥ <input type="text" value={this.state.applyNum} onInput={this.handleInput} placeholder="0.00" maxLength="5"/></p>
                     </form>
                     <Button className="subButton" type="primary" htmlType="submit" onClick={this.showModal.bind(this)}>
                         申请提现
@@ -69,7 +85,7 @@ class Balance extends Component {
                         okText='确认'
                         onCancel={this.handleCancel.bind(this)}
                     >
-                        <p>请输提现金额</p>
+                        <p>{this.state.alertTip}</p>
                         </Modal>
                 </section>
             </main>

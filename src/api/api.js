@@ -16,6 +16,20 @@ class API extends Server {
         }
     }
 
+    //获取图片地址
+    async uploadImg(params = {}) {
+        try {
+            let result = await this.axios('post', '//elm.cangdu.org/v1/addimg/shop', params)
+            if (result && result.status === 1) {
+                return result
+            } else {
+
+            }
+        } catch (error) {
+            throw error
+        }
+    }
+
     //获取金额
     async getBalance(params = {}) {
         try {
