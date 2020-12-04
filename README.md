@@ -1,5 +1,78 @@
 # pxq-react
 
+
+
+##项目背景
+
+主要理解react 和 redux 的编译方式，react + redux 之间的配合方式，以及用到了一些其他的插件
+
+使用react渲染，react-router实现路由懒加载并跳转，redux进行逻辑运算、储存数据和实现组件尤其是顶层组件的通信
+
+yarn eject命令更改webpack配置（慎用，不可逆）添加less,less-load,引入less;lib-flexible,postcss-px2rem,解决一像素，移动端适配问题。
+
+使用 redux-devtools-extension 查看 Redux 中状态变化。
+
+项目中用到了iconfont，@ant-design/icons来熟悉各种字体图标，antd练习到了ui框架。
+
+immutable防止state对象被错误赋值。代替deepclone
+
+
+
+## 安装
+
+```js
+$ npm install 或者 yarn(推荐)
+$ npm start
+```
+
+
+
+## 运行
+
+```js
+$ npm start
+```
+
+
+
+## 技术栈
+
+"react": "^17.0.1",
+
+"react-router-dom": "^5.2.0",
+
+"redux": "^4.0.5",
+
+"react-redux": "^7.2.2",
+
+"redux-devtools-extension": "^2.13.8",
+
+"redux-thunk": "^2.3.0",
+
+"babel-plugin-import": "^1.13.3",
+
+"less": "^3.12.2",
+
+"less-loader": "^7.1.0",
+
+"lib-flexible": "^0.3.2",
+
+"postcss-px2rem": "^0.3.0",
+
+"webpack": "4.44.2",
+
+"immutable": "^4.0.0-rc.12",
+
+"antd": "^4.8.6",
+
+"@ant-design/icons": "^4.3.0",
+
+
+
+## Change Log
+
+
+
 **day01**
 
 pages文件里放各个页面，组件名要大写，放各自的jsx与less文件。
@@ -43,7 +116,7 @@ immutable.js :Immutable数据就是一旦创建，就不能更改的数据。每
 
 
 
-# day02
+**day02**
 
 `@import (reference) "foo.less";` 使用 @ import(reference) 导入外部文件,reference 是 Less 语言中最强大的特性之一,除非引用，否则不将导入的样式添加到已编译的输出中
 
@@ -95,7 +168,9 @@ module.exports = {
 }
 ```
 
-# day03
+
+
+**day03**
 
 先安装 redux 再安装 react-redux，脚手架中并没有他们两个,
 
@@ -107,7 +182,7 @@ redux-devtools-extension 可以查看redux的工具
 
 
 
-# day04
+**day04**
 
 better-scroll 模拟滚动插件
 
@@ -173,6 +248,8 @@ class API extends Server  {
 export default new API();
 ```
 
-# day05
+
+
+**day05**
 
 巧用get和set，能够直接操作对象属性实现读写，可以极大的提高编程效率
